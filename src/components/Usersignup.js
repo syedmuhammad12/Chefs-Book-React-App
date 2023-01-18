@@ -12,6 +12,8 @@ const Usersignup = () => {
 
     const [mail, setMail] = useState("")
     const [pass, setPass] = useState("")
+    const [name, setName] = useState("")
+    
     const handleUser = (event) => {
         setMail(event.target.value)
 
@@ -22,9 +24,14 @@ const Usersignup = () => {
         setPass(event.target.value)
     }
 
+    const handleName = (event) => {
+        setName(event.target.value)
+
+    }
+
     async function user_signup() {
     
-        let response = await axios.post(API_URL+"user_signup", { email: mail, password:pass, name: "Syed Muhammad"  });
+        let response = await axios.post(API_URL+"user_signup", { email: mail, password: pass, name: name  });
         
         // setOcrtext(response.data.text);
         // igo = "data:image/jpeg;base64,"+response.data.image
@@ -60,7 +67,8 @@ const Usersignup = () => {
         <div className="page">
             <div className="cover">
                 <h1>SIGN UP</h1>
-                <input type="text" value={mail} onChange={handleUser} placeholder="enter your username"></input>
+                <input type="text" value={name} onChange={handleName} placeholder="enter your Name"></input>
+                <input type="text" value={mail} onChange={handleUser} placeholder="enter your Email"></input>
                 <input type="password" value={pass} onChange={handlePass} placeholder="enter your password"></input>
                 <button className="btn-login" onClick={routeChange} type="submit">SUBMIT</button>
             </div>

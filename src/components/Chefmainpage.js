@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import "./Chefmainpage.css";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Chefmainpage = () => {
 
     const [show, setShow] = useState(false)
 
     const [items, setItems] = useState(Menu);
+
+    const location = useLocation();
+    console.log(location);
+    console.log(location.state.username,  location.state.name, location.state.email, location.state.password);
 
     let navigateToView = useNavigate(); 
     const routeChangeToViewRecipe = () =>{ 

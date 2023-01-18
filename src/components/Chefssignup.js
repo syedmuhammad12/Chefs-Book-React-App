@@ -1,23 +1,82 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Chefssignup.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
+
+let API_URL = "http://127.0.0.1:5000/";
 const ChefsSignup = () => {
 
-    let navigate = useNavigate(); 
-    const routeChange = () =>{ 
-        let path = "/chefLogin"; 
-        navigate(path);
+    const [mail, setMail] = useState("")
+    const [pass, setPass] = useState("")
+    const [nam, setName] = useState("")
+    const [user, setUser] = useState("")
+
+    const handleMail = (event) => {
+        setMail(event.target.value)
+
     }
 
-    return(
+    const handlePass = (event) => {
+
+        setPass(event.target.value)
+    }
+
+    const handleName = (event) => {
+        setName(event.target.value)
+
+    }
+
+    const handleUser = (event) => {
+        setUser(event.target.value)
+
+    }
+
+    async function chef_signup() {
+
+        let response = await axios.post(API_URL + "chef_signup", { email: mail, password: pass, name: nam, username: user });
+
+        // setOcrtext(response.data.text);
+        // igo = "data:image/jpeg;base64,"+response.data.image
+        // imageRef.current.src = igo;
+        console.log(response.data);
+        return response.data;
+
+
+
+    }
+
+
+
+    let navigate = useNavigate();
+    const routeChange = async () => {
+        
+
+        let res = await chef_signup();
+        if (res === "Account Added Successfully") {
+
+            let path = "/chefLogin";
+            navigate(path);
+
+        }
+
+        else {
+            alert(res);
+
+        }
+
+    }
+
+    return (
 
         <div className="page">
-            <div className="cover">
+            <div className="chef-signup">
                 <h1>SIGN UP</h1>
-                <input type="text" placeholder="enter your username"></input>
-                <input type="password" placeholder="enter your password"></input>
-                <button className="btn-login" onClick={routeChange} type="submit">SUBMIT</button>
+                <input type="text" value={nam} onChange={handleName} placeholder="enter your Name"></input>
+                <input type="text" value={user} onChange={handleUser} placeholder="enter your Username"></input>
+                <input type="text" value={mail} onChange={handleMail} placeholder="enter your Email"></input>
+                <input type="password" value={pass} onChange={handlePass} placeholder="enter your password"></input>
+                <button className="btn-login" style={{ height: "11%" }} onClick={routeChange} type="submit">SUBMIT</button>
             </div>
         </div>
     )

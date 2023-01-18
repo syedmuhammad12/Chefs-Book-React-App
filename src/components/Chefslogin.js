@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "./Chefslogin.css";
 import headerimgg from "../assets/img/headerimgg.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
+
+let API_URL = "http://127.0.0.1:5000/";
 const Chefslogin = () => {
 
     const [popupStyle, showPopup] = useState("hide")
@@ -18,6 +21,19 @@ const Chefslogin = () => {
         setPass(event.target.value)
     }
 
+
+
+    async function chef_signin() {
+
+        let response = await axios.post(API_URL + "chef_signin", { email: username, password: pass });
+
+        // setOcrtext(response.data.text);
+        // igo = "data:image/jpeg;base64,"+response.data.image
+        // imageRef.current.src = igo;
+        return response.data;
+
+    }
+
     const popup = () => {
         showPopup("login-popup")
         setTimeout(() => showPopup("hide"), 3000)
@@ -29,14 +45,31 @@ const Chefslogin = () => {
 
     let navigateToSignup = useNavigate();
     const routeChangeToSignup = () => {
+
+
         let path = "/chefSignup";
         navigateToSignup(path);
+
+
     }
 
     let navigateToChefMainPage = useNavigate();
-    const routeChangeToChefMainPage = () => {
-        let path = "/chefMainPage";
-        navigateToChefMainPage(path);
+    const routeChangeToChefMainPage = async () => {
+
+        let res = await chef_signin();
+        if (typeof (res) === "string") {
+            popup();
+            alert(res);
+        }
+        else {
+
+            alert("logged in successfully");
+            let path = "/chefMainPage";
+            console.log(res);
+            navigateToChefMainPage(path, {state: res});
+
+        }
+
     }
 
     return (
@@ -47,12 +80,8 @@ const Chefslogin = () => {
                 <input type="password" autoComplete="off" value={pass} onChange={handlePass} placeholder="enter your password"></input>
                 <button className="btn-login"
                     onClick={() => {
-                        if (username === "admin" && pass === "admin") {
-                            routeChangeToChefMainPage();
-                        }
-                        else {
-                            popup();
-                        }
+                        
+                        routeChangeToChefMainPage();
                     }}
                     type="submit">SUBMIT</button>
                 <div className="alt-login align-items-center">

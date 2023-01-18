@@ -17,7 +17,7 @@
 .cover{
     background-color: linear-gradient(100.95deg, #EA0C5C 0.31%, #000000 98%);
     width: 30em;
-    height: 35em;
+    height: 31em;
     position: relative;
     border-radius: 1em;
     box-shadow: 0 0.188em 1.550em linear-gradient(100.95deg, #EA0C5C 0.31%, #000000 98%);
@@ -30,7 +30,7 @@
 .cover h1{
     color: #fff;
     font-weight: 700;
-    font-size: 96px;
+    font-size: 75px;
 }
 
 .cover input{
