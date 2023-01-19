@@ -245,15 +245,18 @@ import "./Addrecipe.css";
 // import Avatar from "react-avatar-edit";
 import 'primeicons/primeicons.css';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
+let API_URL = "http://127.0.0.1:5000/";
 const Addrecipe = () => {
 
 
     const [file, setFile] = useState();
-    const [img_path, setImgPath] = useState(null);
+    const [img_path, setImgPath] = useState("");
     const [upload_photo, setUploadPhoto] = useState("Upload Photo");
     const [display_photo, setDisplayPhoto] = useState("none");
-    const inputFile = useRef(null)
+    const inputFile = useRef(null);
+    var fReader = new FileReader();
 
     const [show, setShow] = useState(false);
     function handleChange(e) {
@@ -269,10 +272,27 @@ const Addrecipe = () => {
     };
 
     const changePic = () => {
-        setUploadPhoto("")
-        setDisplayPhoto("inline-block");
-        setImgPath(URL.createObjectURL(inputFile.current.files[0]));
-        console.log("heheh")
+
+        if (inputFile.current.files.length > 0) {
+            setUploadPhoto("")
+            setDisplayPhoto("inline-block");
+            setImgPath(URL.createObjectURL(inputFile.current.files[0]));
+        }
+    }
+
+
+    const send_data = async () => {
+        
+        await fReader.readAsDataURL(inputFile.current.files[0]);
+        fReader.onloadend = async function (event) {
+            
+            let response = await axios.post(API_URL+"addrecipe", { file: event.target.result });
+            alert(response.data);
+
+          }
+        
+
+
     }
 
 
@@ -334,7 +354,7 @@ const Addrecipe = () => {
                 <div className="secondOne">
                     <textarea className="ingredientsRecipe" placeholder="Enter Your Recipe's Ingredients" required></textarea>
                     <textarea className="methodRecipe" placeholder="Enter Your Recipe's Method" required></textarea>
-                    <button className="btn btn-primary">Save</button>
+                    <button className="btn btn-primary" onClick={send_data}>Save</button>
                 </div>
             </div>
 
