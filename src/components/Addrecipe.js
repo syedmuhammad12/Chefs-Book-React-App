@@ -244,7 +244,7 @@ import React, { useState, useRef } from "react";
 import "./Addrecipe.css";
 // import Avatar from "react-avatar-edit";
 import 'primeicons/primeicons.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import axios from "axios";
 
 let API_URL = "http://127.0.0.1:5000/";
@@ -253,15 +253,39 @@ const Addrecipe = () => {
 
     const [file, setFile] = useState();
     const [img_path, setImgPath] = useState("");
+    const [rec_name, setRecName] = useState("");
+    const [rec_ing, setRecIng] = useState("");
+    const [rec_method, setRecMethod] = useState("");
     const [upload_photo, setUploadPhoto] = useState("Upload Photo");
     const [display_photo, setDisplayPhoto] = useState("none");
     const inputFile = useRef(null);
     var fReader = new FileReader();
 
     const [show, setShow] = useState(false);
+    const [searchParams] = useSearchParams();
+    const user = searchParams.get("user");
+
+
     function handleChange(e) {
         console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
+
+    function handleNameChange(e) {
+        
+        console.log(user);
+        setRecName(e.target.value);
+    }
+
+
+    function handleIngChange(e) {
+        setRecIng(e.target.value);
+    }
+
+
+    function handleMethodChange(e) {
+        setRecMethod(e.target.value);
     }
 
 
@@ -283,10 +307,14 @@ const Addrecipe = () => {
 
     const send_data = async () => {
         
+            // console.log(location);
+            // console.log(file);
         await fReader.readAsDataURL(inputFile.current.files[0]);
         fReader.onloadend = async function (event) {
             
-            let response = await axios.post(API_URL+"addrecipe", { file: event.target.result });
+
+            let response = await axios.post(API_URL+"addrecipe", { file: event.target.result, recname: rec_name, recing: rec_ing,
+                recmethod: rec_method, username: user});
             alert(response.data);
 
           }
@@ -348,12 +376,12 @@ const Addrecipe = () => {
                         <b>{upload_photo}</b>
                     </button>
                     <div className="recipeN">
-                        <input className="inputTextRecipeName" placeholder="Enter Your Recipe's Name" required></input>
+                        <input className="inputTextRecipeName" value={rec_name} onChange={handleNameChange} placeholder="Enter Your Recipe's Name" required></input>
                     </div>
                 </div>
                 <div className="secondOne">
-                    <textarea className="ingredientsRecipe" placeholder="Enter Your Recipe's Ingredients" required></textarea>
-                    <textarea className="methodRecipe" placeholder="Enter Your Recipe's Method" required></textarea>
+                    <textarea className="ingredientsRecipe" value={rec_ing} onChange={handleIngChange} placeholder="Enter Your Recipe's Ingredients" required></textarea>
+                    <textarea className="methodRecipe" value={rec_method} onChange={handleMethodChange} placeholder="Enter Your Recipe's Method" required></textarea>
                     <button className="btn btn-primary" onClick={send_data}>Save</button>
                 </div>
             </div>

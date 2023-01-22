@@ -62,10 +62,8 @@ const Chefslogin = () => {
             alert(res);
         }
         else {
-
             alert("logged in successfully");
             let path = "/chefMainPage";
-            console.log(res);
             navigateToChefMainPage(path, {state: res});
 
         }
