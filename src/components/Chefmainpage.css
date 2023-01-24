@@ -192,6 +192,8 @@ main {
 */
 
 
+
+
 :root {
     --header-height: 3rem;
     --nav-width: 68px
@@ -353,6 +355,52 @@ main {
     left: 0;
 }
 
+.modalDelete{
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.fade.modalDelete.modal.show {
+    width: 100%;
+}
+
+.fade.modal-backdrop.show {
+    display: none;
+}
+
+button.btn.btn-yesButton.secondary {
+    border: 2px solid #EA0C5C;
+    background: #EA0C5C;
+    color: #fff;
+    transition: .3s;
+}
+
+button.btn.btn-yesButton.secondary:hover{
+    border: 2px solid #000;
+    background: #000;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+button.btn.btn-noButton.primary {
+    border: 2px solid #000;
+    background: #000;
+    color: #fff;
+    transition: .3s;
+}
+
+button.btn.btn-noButton.primary:hover{
+    border: 2px solid #EA0C5C;
+    background: #EA0C5C;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+@media(max-width: 350px){
+    .modal-footer{
+        justify-content: center;
+    }
+}
+
 .space-toggle {
     padding-left: calc(var(--nav-width) + 1rem);
 }
@@ -365,6 +413,11 @@ main {
 
 .row{
     padding: 5px;
+    align-items: center;
+}
+
+.alignChefMainPage{
+    justify-content: left !important;
 }
 
 .item1{
@@ -373,8 +426,16 @@ main {
 
 .img-div{
     border-radius: 10px;
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.bottomResponsivenessChefMainPage {
+    display: flex;
+    flex-direction: row;
+    margin-top: 600px;
+    margin-bottom: 60px;
 }
 
 @media screen and (min-width: 808px) {
@@ -404,7 +465,7 @@ main {
 
 @media(max-width: 400px){
     .price-book-divide{
-        /* display: flex; */
         flex-direction: column;
+        align-items: center;
     }
 }

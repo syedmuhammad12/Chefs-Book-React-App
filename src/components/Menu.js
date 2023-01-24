@@ -5,29 +5,29 @@ const Menu= [
         recipeName: "Steak"
     },
 
-    {
-        id:2,
-        image: "images/steak.jpg",
-        recipeName: "Maggi"
-    },
+    // {
+    //     id:2,
+    //     image: "images/steak.jpg",
+    //     recipeName: "Maggi"
+    // },
 
-    {
-        id:3,
-        image: "images/steak.jpg",
-        recipeName: "Macaronni"
-    },
+    // {
+    //     id:3,
+    //     image: "images/steak.jpg",
+    //     recipeName: "Macaronni"
+    // },
 
-    {
-        id:4,
-        image: "images/steak.jpg",
-        recipeName: "Noodles"
-    },
+    // {
+    //     id:4,
+    //     image: "images/steak.jpg",
+    //     recipeName: "Noodles"
+    // },
 
-    {
-        id:5,
-        image: "images/steak.jpg",
-        recipeName: "Hehe"
-    },
+    // {
+    //     id:5,
+    //     image: "images/steak.jpg",
+    //     recipeName: "Hehe"
+    // },
 ]
 
 export default Menu;

@@ -10,6 +10,7 @@ import Userviewofrecipes from "../components/Userviewofrecipes";
 import Userlogin from "../components/Userlogin";
 import Usersignup from "../components/Usersignup";
 import Updaterecipe from "../components/Updaterecipe";
+import ViewRecipeUser from "../components/ViewRecipeUser";
 
 function AppRouter() {
     return (
@@ -24,6 +25,7 @@ function AppRouter() {
             <Route path="/userLogin" element={<Userlogin />} />
             <Route path="/userSignup" element={<Usersignup />} />
             <Route path="/updateRecipe" element={<Updaterecipe />} />
+            <Route path="/viewRecipeUser" element={<ViewRecipeUser />} />
         </Routes>
     )
 }
