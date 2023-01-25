@@ -27,14 +27,15 @@ const ViewRecipeUser = () => {
             <aside className={`sidebar ${show ? 'show' : null}`}>
                 <nav className="nav">
                     <div>
-                        <Link to="/" className="nav-link">
+                        <Link className="nav-link">
                             <i className="fas fa-home-alt nav-link-icon"></i>
                             <span className="nav-link-name">Homepage</span>
                         </Link>
 
                         <div className="nav-list">
                             <Link to="/userViewOfRecipes" className="nav-link">
-                                <i className="fa-solid fa-house nav-link-icon"></i>
+
+                                <i className="fa-solid fa-utensils nav-link-icon"></i>
                                 <span className="nav-link-name">Recipes</span>
                             </Link>
                         </div>

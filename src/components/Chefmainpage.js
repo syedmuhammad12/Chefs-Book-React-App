@@ -160,8 +160,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 
-let API_URL = "http://127.0.0.1:5000/chefrecipe";
-let API_CALL = "http://127.0.0.1:5000/deleterecipe";
+let API_URL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/chefrecipe";
+let API_CALL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/deleterecipe";
 const Chefmainpage = () => {
 
     const [show, setShow] = useState(false)
@@ -197,8 +197,8 @@ const Chefmainpage = () => {
 
 
     const location = useLocation();
-    // console.log(location);
-    // console.log(location.state.username, location.state.name, location.state.email, location.state.password);
+    console.log(location);
+    console.log(location.state.username, location.state.name, location.state.email, location.state.password);
 
     useEffect(() => {
         console.log("hehe");
@@ -261,24 +261,24 @@ const Chefmainpage = () => {
             <aside className={`sidebar ${show ? 'show' : null}`}>
                 <nav className="nav">
                     <div>
-                        <Link to="/" className="nav-link">
+                        <Link className="nav-link">
                             <i className="fas fa-home-alt nav-link-icon"></i>
                             <span className="nav-link-name">Homepage</span>
                         </Link>
 
                         <div className="nav-list">
-                            <Link to="/chefMainPage" className="nav-link active">
-                                <i className="fa-solid fa-house nav-link-icon"></i>
+                            <Link to="/chefMainPage" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}} className="nav-link active">
+                                <i className="fa-solid fa-cookie-bite nav-link-icon"></i>
                                 <span className="nav-link-name">My Recipes</span>
                             </Link>
-                            <Link to={{pathname: '/addrecipe',  search: `?user=${location.state.username}`}} className="nav-link">
+                            <Link to='/addrecipe' state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}} className="nav-link">
                                 <i className="fa-solid fa-circle-plus nav-link-icon"></i>
                                 <span className="nav-link-name">Add Recipe</span>
                             </Link>
-                            <Link to="/updateRecipe" className="nav-link">
+                            {/* <Link to="/updateRecipe" className="nav-link">
                                 <i className="fa-solid fa-house nav-link-icon"></i>
                                 <span className="nav-link-name">Update Recipe</span>
-                            </Link>
+                            </Link> */}
                         </div>
                     </div>
                     <Link to="/" className="nav-link">

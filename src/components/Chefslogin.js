@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-let API_URL = "http://127.0.0.1:5000/";
+let API_URL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/";
 const Chefslogin = () => {
 
     const [popupStyle, showPopup] = useState("hide")

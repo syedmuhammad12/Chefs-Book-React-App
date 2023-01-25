@@ -273,7 +273,7 @@
 
 
 //     function handleNameChange(e) {
-        
+
 //         console.log(user);
 //         setRecName(e.target.value);
 //     }
@@ -306,19 +306,19 @@
 
 
 //     const send_data = async () => {
-        
+
 //             // console.log(location);
 //             // console.log(file);
 //         await fReader.readAsDataURL(inputFile.current.files[0]);
 //         fReader.onloadend = async function (event) {
-            
+
 
 //             let response = await axios.post(API_URL+"addrecipe", { file: event.target.result, recname: rec_name, recing: rec_ing,
 //                 recmethod: rec_method, username: user});
 //             alert(response.data);
 
 //           }
-        
+
 
 
 //     }
@@ -401,7 +401,7 @@ import 'primeicons/primeicons.css';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import axios from "axios";
 
-let API_URL = "http://127.0.0.1:5000/";
+let API_URL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/";
 
 const Addrecipe = () => {
 
@@ -417,19 +417,21 @@ const Addrecipe = () => {
 
     const [show, setShow] = useState(false);
 
-    
-    const [searchParams] = useSearchParams();
-    const user = searchParams.get("user");
+    const location = useLocation();
+    // console.log(location.state.username, location.state.name, location.state.email, location.state.password);
+
+    // const [searchParams] = useSearchParams();
+    // const user = searchParams.get("user");
 
 
-        function handleChange(e) {
+    function handleChange(e) {
         setFile(URL.createObjectURL(e.target.files[0]));
     }
 
 
     function handleNameChange(e) {
-        
-        console.log(user);
+
+        console.log(location.state.username);
         setRecName(e.target.value);
     }
 
@@ -459,19 +461,21 @@ const Addrecipe = () => {
     }
 
 
-       const send_data = async () => {
-        
-            // console.log(location);
-            // console.log(file);
+    const send_data = async () => {
+
+        // console.log(location);
+        // console.log(file);
         await fReader.readAsDataURL(inputFile.current.files[0]);
         fReader.onloadend = async function (event) {
-            
 
-            let response = await axios.post(API_URL+"addrecipe", { file: event.target.result, recname: rec_name, recing: rec_ing,
-                recmethod: rec_method, username: user});
+
+            let response = await axios.post(API_URL + "addrecipe", {
+                file: event.target.result, recname: rec_name, recing: rec_ing,
+                recmethod: rec_method, username: location.state.username
+            });
             alert(response.data);
 
-          }
+        }
     }
 
     // function handleChange(e) {
@@ -497,24 +501,25 @@ const Addrecipe = () => {
             <aside className={`sidebar ${show ? 'show' : null}`}>
                 <nav className="nav">
                     <div>
-                        <Link to="/" className="nav-link">
+                        <Link className="nav-link">
                             <i className="fas fa-home-alt nav-link-icon"></i>
                             <span className="nav-link-name">Homepage</span>
                         </Link>
 
                         <div className="nav-list">
-                            <Link to="/chefMainPage" className="nav-link">
-                                <i className="fa-solid fa-house nav-link-icon"></i>
+                            <Link to="/chefMainPage" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}} className="nav-link">
+                                <i className="fa-solid fa-cookie-bite nav-link-icon"></i>
                                 <span className="nav-link-name">My Recipes</span>
                             </Link>
-                            <Link to="/addRecipe" className="nav-link active">
+                            <Link to="/addRecipe" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}} className="nav-link active">
+
                                 <i className="fa-solid fa-circle-plus nav-link-icon"></i>
                                 <span className="nav-link-name">Add Recipe</span>
                             </Link>
-                            <Link to="/updateRecipe" className="nav-link">
+                            {/* <Link to="/updateRecipe" className="nav-link">
                                 <i className="fa-solid fa-house nav-link-icon"></i>
                                 <span className="nav-link-name">Update Recipe</span>
-                            </Link>
+                            </Link> */}
                             {/* <Link to="/" className="nav-link">
                                 <i className="fa-solid fa-trash nav-link-icon"></i>
                                 <span className="nav-link-name">Delete Recipe</span>
@@ -543,8 +548,8 @@ const Addrecipe = () => {
                     </div>
                 </div>
                 <div className="secondOne">
-                    <textarea className="ingredientsRecipe" value={rec_ing} onChange={handleIngChange}  placeholder="Enter Your Recipe's Ingredients" required></textarea>
-                    <textarea className="methodRecipe" value={rec_method} onChange={handleMethodChange}  placeholder="Enter Your Recipe's Method" required></textarea>
+                    <textarea className="ingredientsRecipe" value={rec_ing} onChange={handleIngChange} placeholder="Enter Your Recipe's Ingredients" required></textarea>
+                    <textarea className="methodRecipe" value={rec_method} onChange={handleMethodChange} placeholder="Enter Your Recipe's Method" required></textarea>
                     <button className="buttonAddRecipe btn-primary" onClick={send_data}>Save</button>
                 </div>
             </div>

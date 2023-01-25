@@ -223,7 +223,7 @@ import steak from "../assets/img/steak.jpg"
 import maggi from "../assets/img/maggi.jpg"
 import axios from "axios";
 
-let API_URL = "http://127.0.0.1:5000/getrecipe";
+let API_URL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/getrecipe";
 const Userviewofrecipes = () => {
 
     const [show, setShow] = useState(false)
@@ -261,14 +261,15 @@ const Userviewofrecipes = () => {
             <aside className={`sidebar ${show ? 'show' : null}`}>
                 <nav className="nav">
                     <div>
-                        <Link to="/" className="nav-link">
+                        <Link  className="nav-link">
                             <i className="fas fa-home-alt nav-link-icon"></i>
                             <span className="nav-link-name">Homepage</span>
                         </Link>
 
                         <div className="nav-list">
-                            <Link to="/userViewOfRecipes" className="nav-link active">
-                                <i className="fa-solid fa-house nav-link-icon"></i>
+                            <Link to="/userViewOfRecipes"  className="nav-link active">
+                                {/* <i className="fa-solid fa-house nav-link-icon"></i> */}
+                                <i className="fa-solid fa-utensils nav-link-icon"></i>
                                 <span className="nav-link-name">Recipes</span>
                             </Link>
                         </div>
@@ -290,7 +291,7 @@ const Userviewofrecipes = () => {
                                 items.data.map((elem) => (
 
                                     <div className="item1 col-12 col-md-6 col-lg-6 col-sl-4 my-5">
-                                        <div className="row item-inside" onClick={routeChangeToViewRecipeUser(elem)}>
+                                        <div className="row item-inside" onClick={() => {routeChangeToViewRecipeUser(elem)}}>
 
                                             <div className="col-12 col-md-12 col-lg-4 img-divUser">
                                                 <img src={elem.recimg} alt="menuPic" className="img-fluid"></img>

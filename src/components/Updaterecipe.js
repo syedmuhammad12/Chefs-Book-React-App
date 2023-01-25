@@ -228,15 +228,58 @@
 
 import React, { useState } from "react";
 import "./Updaterecipe.css";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import steak from "../assets/img/steak.jpg"
+import axios from "axios";
 
+let API_URL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/";
 const Updaterecipe = () => {
 
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
 
-    return(
-        <main className={show ? 'space-toggle' : null }>
+
+    const location = useLocation();
+
+    const [rec_name, setRecName] = useState(location.state.recname)
+    const [rec_ing, setRecIng] = useState(location.state.recing)
+    const [rec_method, setRecMethod] = useState(location.state.recmethod)
+    const [rec_img, setRecImg] = useState(location.state.recimg)
+
+
+    function handleNameChange(e) {
+
+        setRecName(e.target.value);
+    }
+
+
+    function handleIngChange(e) {
+        setRecIng(e.target.value);
+    }
+
+
+    function handleMethodChange(e) {
+        setRecMethod(e.target.value);
+    }
+
+
+    async function updateRecipe() {
+
+        // let response = await axios.post(API_URL + "updaterecipe", {
+        //     file: "event.target.result", recname: rec_name, recing: rec_ing,
+        //     recmethod: rec_method
+        // });
+
+        let response = await axios.post(API_URL + "updaterecipe", {
+            recname: rec_name, recing: rec_ing,
+            recmethod: rec_method, recid: location.state.recid
+        });
+
+        alert(response.data);
+
+    }
+
+    return (
+        <main className={show ? 'space-toggle' : null}>
             <header className={`header ${show ? 'space-toggle' : null}`}>
                 <div className="header-toggle" onClick={() => setShow(!show)}>
                     <i className="fa-solid fa-bars"></i>
@@ -245,24 +288,24 @@ const Updaterecipe = () => {
             <aside className={`sidebar ${show ? 'show' : null}`}>
                 <nav className="nav">
                     <div>
-                        <Link to="/" className="nav-link">
+                        <Link className="nav-link">
                             <i className="fas fa-home-alt nav-link-icon"></i>
                             <span className="nav-link-name">Homepage</span>
                         </Link>
 
                         <div className="nav-list">
-                            <Link to="/chefMainPage" className="nav-link">
-                                <i className="fa-solid fa-house nav-link-icon"></i>
+                            <Link to="/chefMainPage" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}}  className="nav-link">
+                                <i className="fa-solid fa-cookie-bite nav-link-icon"></i>
                                 <span className="nav-link-name">My Recipes</span>
                             </Link>
-                            <Link to="/addRecipe" className="nav-link">
+                            <Link to="/addRecipe" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}}  className="nav-link">
                                 <i className="fa-solid fa-circle-plus nav-link-icon"></i>
                                 <span className="nav-link-name">Add Recipe</span>
                             </Link>
-                            <Link to="/updateRecipe" className="nav-link active">
+                            {/* <Link to="/updateRecipe" className="nav-link active">
                                 <i className="fa-solid fa-house nav-link-icon"></i>
                                 <span className="nav-link-name">Update Recipe</span>
-                            </Link>
+                            </Link> */}
                             {/* <Link to="/" className="nav-link">
                                 <i className="fa-solid fa-trash nav-link-icon"></i>
                                 <span className="nav-link-name">Delete Recipe</span>
@@ -276,27 +319,27 @@ const Updaterecipe = () => {
                 </nav>
             </aside>
             <h1 className="pt-4">Update Recipe Page</h1>
-            <hr/>
+            <hr />
             <div>
                 <div className="topUpdateRecipe">
                     <div className="imageUpdateRecipe">
-                        <img src={steak} alt="menuPic" className="img-fluid"></img>
+                        <img src={rec_img} alt="menuPic" className="img-fluid"></img>
                     </div>
                 </div>
                 <div className="headingOneUpdateRecipe">
                     <h2>Recipe Name : </h2>
-                    <textarea className="headingOneUpdateRecipeTextArea1" placeholder="Enter the Recipe Name You Want To Update"></textarea>
+                    <textarea className="headingOneUpdateRecipeTextArea1" value={rec_name} onChange={handleNameChange} placeholder="Enter the Recipe Name You Want To Update"></textarea>
                 </div>
                 <div className="ingredientsUpdateRecipe">
                     <h2>Ingredients :</h2>
-                    <textarea className="headingOneUpdateRecipeTextArea2" placeholder="Enter the Ingredients You Want To Update"></textarea>
+                    <textarea className="headingOneUpdateRecipeTextArea2" value={rec_ing} onChange={handleIngChange} placeholder="Enter the Ingredients You Want To Update"></textarea>
                 </div>
                 <div className="methodUpdateRecipe">
                     <h2>Method :</h2>
-                    <textarea className="headingOneUpdateRecipeTextArea3" placeholder="Enter the Method You Want To Update"></textarea>
+                    <textarea className="headingOneUpdateRecipeTextArea3" value={rec_method} onChange={handleMethodChange} placeholder="Enter the Method You Want To Update"></textarea>
                 </div>
                 <div className="updateRecipeButton">
-                    <button className="buttonUpdateRecipe">Update</button>
+                    <button className="buttonUpdateRecipe" onClick={updateRecipe}>Update</button>
                 </div>
             </div>
 

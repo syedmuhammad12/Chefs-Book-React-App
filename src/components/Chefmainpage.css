@@ -219,7 +219,7 @@ main {
     /* background: linear-gradient(116.72deg, rgba(234, 12, 92, 0.74) 5.91%, rgba(0, 0, 0, 0.74) 85.65%); */
 }
 
-/************ Custom Scroll Bar ************/
+/**** Custom Scroll Bar ****/
 
 ::-webkit-scrollbar{
     width: 3px;
@@ -434,7 +434,7 @@ button.btn.btn-noButton.primary:hover{
 .bottomResponsivenessChefMainPage {
     display: flex;
     flex-direction: row;
-    margin-top: 600px;
+    margin-top: 650px;
     margin-bottom: 60px;
 }
 
