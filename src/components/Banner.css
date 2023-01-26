@@ -38,6 +38,12 @@ html{
     color: #FFFFFF;
     border: none;
     cursor: pointer;
+    transition: .3s;
+}
+
+.mainPgBtn1:hover{
+    background: rgba(5, 48, 112, 0.622);
+    color: #fff;
 }
 
 .mainPgBtn2 {
@@ -53,6 +59,12 @@ html{
     line-height: 29px;
     color: #FFFFFF;
     border: none;
+    transition: .3s;
+}
+
+.mainPgBtn2:hover{
+    background: rgba(5, 48, 112, 0.622);
+    color: #fff;
 }
 
 .homePg{

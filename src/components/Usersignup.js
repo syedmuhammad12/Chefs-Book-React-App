@@ -45,7 +45,7 @@ const Usersignup = () => {
 
     const routeChange = async () =>{ 
 
-        
+        if(name!=="" && mail!=="" && pass!==""){
         let res = await user_signup();
         
         if (res==="Account Added Successfully"){
@@ -57,6 +57,10 @@ const Usersignup = () => {
         else{
             alert(res);
         }
+    }
+    else{
+        alert("Fieds can't be empty");
+    }
 
     }
 

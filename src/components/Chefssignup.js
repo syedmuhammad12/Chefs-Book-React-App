@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Chefssignup.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-let API_URL = "http://127.0.0.1:5000/";
+let API_URL = "https://chefs-book-api-prod-chefsbook-3chtzv.mo6.mogenius.io/";
 const ChefsSignup = () => {
 
     const [mail, setMail] = useState("")
@@ -50,19 +50,23 @@ const ChefsSignup = () => {
 
     let navigate = useNavigate();
     const routeChange = async () => {
-        
 
-        let res = await chef_signup();
-        if (res === "Account Added Successfully") {
+        if (nam !== "" && user !== "" && mail !== "" && pass !== "") {
+            let res = await chef_signup();
+            if (res === "Account Added Successfully") {
 
-            let path = "/chefLogin";
-            navigate(path);
+                let path = "/chefLogin";
+                navigate(path);
 
+            }
+
+            else {
+                alert(res);
+
+            }
         }
-
-        else {
-            alert(res);
-
+        else{
+            alert("Fields can't be empty");
         }
 
     }

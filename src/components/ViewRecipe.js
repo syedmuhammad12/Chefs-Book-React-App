@@ -218,11 +218,11 @@ const Userviewofrecipes = () => {
                         </Link>
 
                         <div className="nav-list">
-                            <Link to="/chefMainPage" className="nav-link">
+                            <Link to="/chefMainPage" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}} className="nav-link">
                                 <i className="fa-solid fa-house nav-link-icon"></i>
                                 <span className="nav-link-name">My Recipes</span>
                             </Link>
-                            <Link to={{pathname: '/addrecipe',  search: `?user=${location.state.username}`}} className="nav-link">
+                            <Link to="/addrecipe" state={{username: location.state.username, name: location.state.name, email: location.state.email, password: location.state.password}} className="nav-link">
                                 <i className="fa-solid fa-circle-plus nav-link-icon"></i>
                                 <span className="nav-link-name">Add Recipe</span>
                             </Link>

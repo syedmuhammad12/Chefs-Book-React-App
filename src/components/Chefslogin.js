@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Chefslogin.css";
 import headerimgg from "../assets/img/headerimgg.png";
+import headerimggg from "../assets/img/headerimggg.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -85,7 +86,7 @@ const Chefslogin = () => {
                     type="submit">SUBMIT</button>
                 <div className="alt-login align-items-center">
                     <span className="chefsDHA">DONT HAVE AN ACCOUNT? <button className="chefsSignup" onClick={routeChangeToSignup}>SIGN UP NOW</button></span>
-                    <img className="chefsLogo" src={headerimgg} alt="Header Img" />
+                    <img className="chefsLogo" src={headerimggg} alt="Header Img" />
                 </div>
                 <div className={popupStyle}>
                     <h3>Login Failed</h3>

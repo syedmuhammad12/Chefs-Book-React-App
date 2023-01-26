@@ -218,12 +218,20 @@ const Chefmainpage = () => {
 
     const routeChangeToViewRecipe = (rec) => {
 
+        rec["name"] = location.state.name;
+        rec["email"] = location.state.email;
+        rec["password"] = location.state.password;
+
         let path = "/viewRecipe";
         navigateToView(path, { state: rec });
     }
 
     let navigateToRecipe = useNavigate();
     const routeChangeToUpdateRecipe = (rec) => {
+        rec["name"] = location.state.name;
+        rec["email"] = location.state.email;
+        rec["password"] = location.state.password;
+
         let path = "/updateRecipe";
         navigateToRecipe(path, { state: rec });
     }
@@ -233,13 +241,14 @@ const Chefmainpage = () => {
 
     async function deleteRecipe(rec) {
 
-        let res = await axios.post(API_CALL, { id: rec.recid, img_path: rec.recimg })
+        let res = await axios.post(API_CALL, { id: rec.recid, img_path: rec.rec_img })
         console.log(res.data);
         // window.location.reload();
         let rand_list = items.data
         var ind = rand_list.indexOf(rec)
         rand_list.splice(ind, 1)
         console.log(rand_list)
+        alert(res.data);
         setItems({ "data": rand_list })
         setTempItem({})
         setShowDelete(false)
